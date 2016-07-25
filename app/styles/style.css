@@ -5,6 +5,19 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  color: #999;
+  text-decoration: none;
+}
+
+body a:hover {
+  color: #0a560a;
+}
+
+a:visited {
+  color: #999;
+}
+
 .clearfix::before,
 .clearfix::after {
   content: " ";
@@ -20,17 +33,8 @@ body {
   float: right;
 }
 
-a {
-  color: green;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #0a560a;
-}
-
-a:visited {
-  color: green;
+.active a {
+  color: #4caf50;
 }
 
 /* Custom Styling */
@@ -39,7 +43,16 @@ a:visited {
   width: 50%;
 }
 
-.center-box .pull-right a:first-child {
+.center-box ul {
+  padding: 0;
+  list-style: none;
+}
+
+.center-box li {
+  display: inline-block;
+}
+
+.center-box li:first-child {
   margin-right: 20px;
 }
 

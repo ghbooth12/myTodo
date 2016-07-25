@@ -7,7 +7,16 @@
 </head>
 <body>
   <div class="container">
-    <ui-view></ui-view>
+    <div class="center-box">
+      <div class="clearfix">
+        <ul class="pull-right">
+          <li ui-sref-active="active"><a ui-sref="main">Active Tasks</a></li>
+          <li ui-sref-active="active"><a ui-sref="history">Task History</a></li>
+        </ul>
+      </div>
+
+      <ui-view></ui-view>
+    </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -18,5 +27,6 @@
   <script src="/scripts/app.js"></script>
   <script src="/scripts/services/Item.js"></script>
   <script src="/scripts/controllers/MainCtrl.js"></script>
+  <script src="/scripts/controllers/HistoryCtrl.js"></script>
 </body>
 </html>

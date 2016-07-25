@@ -15,6 +15,11 @@
         url: '/',
         controller: 'MainCtrl as main',
         templateUrl: '/templates/main.html'
+      })
+      .state('history', {
+        url: '/history',
+        controller: 'HistoryCtrl as history',
+        templateUrl: '/templates/history.html'
       });
   }
 })();
