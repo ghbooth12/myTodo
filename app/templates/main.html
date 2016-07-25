@@ -11,17 +11,17 @@
       <h3>Current Tasks</h3>
     </div>
 
-    <form>
+    <form class="clearfix" ng-submit="main.addItem(main.content)">
       <div class="input">
-        <input type="text" placeholder="Enter new task" value="">
+        <input type="text" placeholder="Enter new task" ng-model="main.content">
       </div>
       <div class="submit">
         <input type="submit" value="Add">
       </div>
     </form>
 
-    <div class="item">
-      <span>testing testing...</span>
+    <div class="item" ng-repeat="item in main.allItems">
+      <span>{{ item.content }}</span>
     </div>
   </div>
 </div>
