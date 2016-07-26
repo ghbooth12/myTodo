@@ -5,7 +5,7 @@
 
   function MainCtrl(Item) {
     this.content = null;
-    this.allItems = Item.all;
+    this.itemArr = Item.all;
     this.addItem = Item.add;
   }
 })();

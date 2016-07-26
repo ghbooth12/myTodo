@@ -10,6 +10,7 @@
       if (content) {
         items.$add({
           content: content,
+          complete: false,
           createdAt: new Date().getTime()
         });
         this.content = null;
