@@ -9,7 +9,16 @@
       restrict: 'E',
       scope: {},
       link: function(scope, element, attributes) {
-        scope.visibleItemArr = Item.all;
+        scope.getActiveItemArr = function() {
+          var all = Item.all;
+          var array = [];
+          for(var i = 0; i < all.length; i++) {
+            if (!all[i].complete && !all[i].overdue) {
+              array.push(all[i]);
+            }
+          }
+          return array;
+        };
 
         scope.getDayDiff = function(item) {
           var currentTime = new Date().getTime();
@@ -20,28 +29,23 @@
           return scope.dayDiff;
         };
 
-        scope.checkToComplete = function(item) {
-          item.complete = true;
-        };
+        scope.checkToComplete = Item.checkOff;
 
-        scope.showHide = function(item) { // CHANGE TO DAY!!
-          if (scope.dayDiff >= 3 || item.complete) {
-            var index = scope.visibleItemArr.indexOf(item);
-            scope.visibleItemArr.splice(index, 1);
-            return false;
-          } else {
-            return true;
+        scope.showHide = function(item) {
+          if (scope.dayDiff === 3) { // CHANGE TO DAY!!
+            Item.dropOff(item);
           }
         };
 
         var timeoutId = $interval(function() {
-          if (scope.visibleItemArr.length > 0) {
-            for(var i = 0; i < scope.visibleItemArr.length; i++) {
-              scope.getDayDiff(scope.visibleItemArr[i]);
-              scope.showHide(scope.visibleItemArr[i]);
+          var activeItemArr = scope.getActiveItemArr();
+          if (activeItemArr.length > 0) {
+            for(var i = 0; i < activeItemArr.length; i++) {
+              scope.getDayDiff(activeItemArr[i]);
+              scope.showHide(activeItemArr[i]);
             }
           }
-          console.log("printing");
+          console.log("Test Message");
         }, 1000); // INCREASE INTERVAL
 
         function stopInterval() {

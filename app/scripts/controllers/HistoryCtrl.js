@@ -1,9 +1,9 @@
 (function() {
   angular
     .module('myTodo')
-    .controller('HistoryCtrl', HistoryCtrl);
+    .controller('HistoryCtrl', ['Item', HistoryCtrl]);
 
-  function HistoryCtrl() {
-    
+  function HistoryCtrl(Item) {
+    this.itemArr = Item.all;
   }
 })();
