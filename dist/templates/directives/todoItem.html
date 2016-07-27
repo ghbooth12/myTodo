@@ -1,4 +1,4 @@
-<div class="item clearfix" ng-repeat="item in visibleItemArr" ng-show="showHide(item)">
+<div class="item clearfix" ng-repeat="item in getActiveItemArr()">
   <a class="check-btn" ng-click="checkToComplete(item)">&check;</a>
   <span ng-bind="item.content"></span>
   <span class="pull-right" ng-bind="'created ' + getDayDiff(item) + ' minute(s) ago'"></span>
