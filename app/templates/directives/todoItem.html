@@ -1,5 +1,9 @@
 <div class="item clearfix" ng-repeat="item in getActiveItemArr()">
   <a class="check-btn" ng-click="checkToComplete(item)">&check;</a>
   <span ng-bind="item.content"></span>
-  <span class="pull-right" ng-bind="'created ' + getDayDiff(item) + ' minute(s) ago'"></span>
+  <div class="pull-right arrow-group">
+    <span class="up-btn" ng-click="levelUp(item)">&and;</span><br>
+    <span class="down-btn" ng-click="levelDown(item)">&or;</span>
+  </div>
+  <span class="pull-right date-btn" ng-bind="'created ' + getDayDiff(item) + ' minute(s) ago'"></span>
 </div> <!-- CHANGE TO DAY!! -->
