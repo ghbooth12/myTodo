@@ -9,16 +9,10 @@
       restrict: 'E',
       scope: {},
       link: function(scope, element, attributes) {
-        scope.getActiveItemArr = function() {
-          var all = Item.all;
-          var array = [];
-          for(var i = 0; i < all.length; i++) {
-            if (!all[i].complete && !all[i].overdue) {
-              array.push(all[i]);
-            }
-          }
-          return array;
-        };
+        scope.getActiveItemArr = Item.getActiveItemArr;
+        scope.checkToComplete = Item.checkOff;
+        scope.levelUp = Item.levelUp;
+        scope.levelDown = Item.levelDown;
 
         scope.getDayDiff = function(item) {
           var currentTime = new Date().getTime();
@@ -29,10 +23,8 @@
           return scope.dayDiff;
         };
 
-        scope.checkToComplete = Item.checkOff;
-
         scope.showHide = function(item) {
-          if (scope.dayDiff === 3) { // CHANGE TO DAY!!
+          if (scope.dayDiff >= 10) { // CHANGE TO DAY!!
             Item.dropOff(item);
           }
         };
@@ -45,7 +37,7 @@
               scope.showHide(activeItemArr[i]);
             }
           }
-          console.log("Test Message");
+          console.log("Test Message"); // Remove Test Log
         }, 1000); // INCREASE INTERVAL
 
         function stopInterval() {

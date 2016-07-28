@@ -108,28 +108,33 @@ form input[type="submit"] {
   padding: 0;
 }
 
+
+/* TodoItem Page */
 .item {
   background-color: #ecfdd9;
   color: #656565;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   margin-bottom: 2px;
 }
 
-.item span.pull-right {
+.item .date-btn {
   color: #656565;
   background-color: #c4ec96;
   border-radius: 5px;
   padding: 5px;
   font-size: 0.6rem;
+  display: inline-block;
+  margin: 18px 15px 0 0;
 }
 
 .check-btn {
   border: 2px solid #999;
   border-radius: 50%;
   padding: 5px 8px;
-  margin-right: 5px;
+  margin: 5px 5px 0 0;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  display: inline-block;
 }
 
 .check-btn:hover {
@@ -137,6 +142,23 @@ form input[type="submit"] {
   background-color: #c4ec96;
 }
 
+.arrow-group {
+}
+
+.up-btn, .down-btn {
+  cursor: pointer;
+  color: #999;
+  font-size: 1.5rem;
+}
+
+.up-btn:hover,
+.down-btn:hover {
+  color: #0a560a;
+  font-weight: bold;
+}
+
+
+/* History Page */
 .item .complete {
   color: blue;
 }
