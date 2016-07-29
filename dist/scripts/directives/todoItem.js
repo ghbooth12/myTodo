@@ -9,32 +9,61 @@
       restrict: 'E',
       scope: {},
       link: function(scope, element, attributes) {
-        scope.getActiveItemArr = Item.getActiveItemArr;
+        var dayDiff;
+        scope.list = Item.all;
         scope.checkToComplete = Item.checkOff;
-        scope.levelUp = Item.levelUp;
-        scope.levelDown = Item.levelDown;
+
+        function collectActive() {
+          for (var i = 0; i < scope.list.length; i ++) {
+            if (scope.list[i].complete || scope.list[i].overdue) {
+              scope.list.splice(i, 1);
+            }
+          }
+        };
+
+        scope.levelUp = function(item) {
+          collectActive();
+          var index = scope.list.indexOf(item);
+          if (index !== 0) {
+            var higherItem = scope.list[index - 1];
+            scope.list[index - 1] = item;
+            scope.list[index] = higherItem;
+          }
+        };
+
+        scope.levelDown = function(item) {
+          collectActive();
+          var index = scope.list.indexOf(item);
+          if (index !== scope.list.length - 1) {
+            var lowerItem = scope.list[index + 1];
+            scope.list[index + 1] = item;
+            scope.list[index] = lowerItem;
+          }
+        };
 
         scope.getDayDiff = function(item) {
           var currentTime = new Date().getTime();
           var gapInMs = currentTime - item.createdAt;
           var msPerMin = 60 * 1000; // CHANGE TO DAY!!
-          scope.dayDiff = Math.ceil(gapInMs / msPerMin);
+          dayDiff = Math.ceil(gapInMs / msPerMin);
 
-          return scope.dayDiff;
+          return dayDiff;
         };
 
-        scope.showHide = function(item) {
-          if (scope.dayDiff >= 10) { // CHANGE TO DAY!!
+        function showHide(item) {
+          if (dayDiff >= 9) { // CHANGE TO DAY!!
+            console.log("dropping....", dayDiff);
             Item.dropOff(item);
           }
         };
 
+        // ------------ Interval -------------
         var timeoutId = $interval(function() {
-          var activeItemArr = scope.getActiveItemArr();
-          if (activeItemArr.length > 0) {
-            for(var i = 0; i < activeItemArr.length; i++) {
-              scope.getDayDiff(activeItemArr[i]);
-              scope.showHide(activeItemArr[i]);
+          var activeList = Item.getActiveItemArr();
+          if (activeList.length > 0) {
+            for(var i = 0; i < activeList.length; i++) {
+              scope.getDayDiff(activeList[i]);
+              showHide(activeList[i]);
             }
           }
           console.log("Test Message"); // Remove Test Log

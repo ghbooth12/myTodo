@@ -5,14 +5,13 @@
 
   function Item($firebaseArray) {
     var fbRef = new Firebase('https://my-todo-f204c.firebaseio.com');
-    var items = $firebaseArray(fbRef.child('items').orderByChild('priority'));
+    var items = $firebaseArray(fbRef.child('items'));
     var addItem = function(content) {
       if (content) {
         items.$add({
           content: content,
           complete: false,
           overdue: false,
-          priority: items.length,
           createdAt: new Date().getTime()
         });
         this.content = null;
@@ -27,30 +26,6 @@
     var dropOff = function(item) {
       item.overdue = true;
       items.$save(item);
-    };
-
-    var levelUp = function(item) {
-      if (item.priority > 0) {
-        var index = items.indexOf(item);
-        var higherItem = items[index - 1];
-
-        item.priority -= 1;
-        items.$save(item);
-        higherItem.priority += 1;
-        items.$save(higherItem);
-      }
-    };
-
-    var levelDown = function(item) {
-      if (item.priority < items.length - 1) {
-        var index = items.indexOf(item);
-        var lowerItem = items[index + 1];
-
-        item.priority += 1;
-        items.$save(item);
-        lowerItem.priority -= 1;
-        items.$save(lowerItem);
-      }
     };
 
     function getActiveItemArr() {
@@ -68,8 +43,6 @@
       add: addItem,
       checkOff: checkOff,
       dropOff: dropOff,
-      levelUp: levelUp,
-      levelDown: levelDown,
       getActiveItemArr: getActiveItemArr
     };
 
