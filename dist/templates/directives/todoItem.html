@@ -1,7 +1,7 @@
 <div class="item clearfix" ng-repeat="item in getActiveItemArr()">
   <a class="check-btn" ng-click="checkToComplete(item)">&check;</a>
   <span ng-bind="item.content"></span>
-  <div class="pull-right arrow-group">
+  <div class="pull-right">
     <span class="up-btn" ng-click="levelUp(item)">&and;</span><br>
     <span class="down-btn" ng-click="levelDown(item)">&or;</span>
   </div>

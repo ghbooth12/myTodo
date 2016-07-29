@@ -3,22 +3,19 @@
     <h3>Task History</h3>
   </div>
 
-  <hr>
+  <div class="divider"></div>
+
   <div class="header">
     <h4>Complete Tasks</h4>
   </div>
   <div class="item clearfix" ng-repeat="item in history.itemArr" ng-show="item.complete">
-    <!-- <a class="check-btn" ng-click="checkToComplete(item)">&check;</a> -->
     <span class="complete" ng-bind="item.content"></span>
-    <!-- <span class="pull-right" ng-bind="'created ' + getDayDiff(item) + ' minute(s) ago'"></span> -->
-  </div> <!-- CHANGE TO DAY!! -->
+  </div>
 
   <div class="header">
     <h4>Overdue Tasks</h4>
   </div>
   <div class="item clearfix" ng-repeat="item in history.itemArr" ng-show="item.overdue">
-    <!-- <a class="check-btn" ng-click="checkToComplete(item)">&check;</a> -->
     <span class="overdue" ng-bind="item.content"></span>
-    <!-- <span class="pull-right" ng-bind="'created ' + getDayDiff(item) + ' minute(s) ago'"></span> -->
-  </div> <!-- CHANGE TO DAY!! -->
+  </div>
 </div>

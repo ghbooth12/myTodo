@@ -43,10 +43,12 @@
         function stopInterval() {
           $interval.cancel(timeoutId);
           timeoutId = undefined;
+          console.log("Interval Stopped"); // Remove Test Log
         }
 
         element.on('$destroy', function() {
           stopInterval();
+          console.log("Destroy Interval"); // Remove Test Log
         });
       }
     };
