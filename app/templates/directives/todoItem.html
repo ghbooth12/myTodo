@@ -1,4 +1,4 @@
-<div class="item clearfix" ng-repeat="item in getActiveItemArr()">
+<div class="item clearfix" ng-repeat="item in list" ng-show="!item.complete && !item.overdue">
   <a class="check-btn" ng-click="checkToComplete(item)">&check;</a>
   <span ng-bind="item.content"></span>
   <div class="pull-right">
