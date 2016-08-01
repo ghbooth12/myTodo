@@ -5,5 +5,5 @@
     <span class="up-btn" ng-click="levelUp(item)">&and;</span><br>
     <span class="down-btn" ng-click="levelDown(item)">&or;</span>
   </div>
-  <span class="pull-right date-btn" ng-bind="'created ' + getDayDiff(item) + ' minute(s) ago'"></span>
-</div> <!-- CHANGE TO DAY!! -->
+  <span class="pull-right date-btn" ng-bind="getDayDiff(item)"></span>
+</div>
