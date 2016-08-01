@@ -9,6 +9,7 @@
       restrict: 'E',
       scope: {},
       link: function(scope, element, attributes) {
+        var delay = 60 * 60 * 1000; // interval delay: every hour
         var dayDiff;
         scope.list = Item.all;
         scope.checkToComplete = Item.checkOff;
@@ -44,15 +45,22 @@
         scope.getDayDiff = function(item) {
           var currentTime = new Date().getTime();
           var gapInMs = currentTime - item.createdAt;
-          var msPerMin = 60 * 1000; // CHANGE TO DAY!!
-          dayDiff = Math.ceil(gapInMs / msPerMin);
+          var msPerDay = 24 * 60 * 60 * 1000; // a day
+          dayDiff = Math.floor(gapInMs / msPerDay);
+          var dayLeft = 7 - dayDiff; // displays how many days left
+          var output;
 
-          return dayDiff;
+          if (dayLeft > 1) {
+            output = dayLeft + " days left";
+          } else {
+            output = dayLeft + " day left";
+          }
+          return output;
         };
 
         function showHide(item) {
-          if (dayDiff >= 9) { // CHANGE TO DAY!!
-            console.log("dropping....", dayDiff);
+          if (dayDiff >= 7) { // drops over 7 days old tasks
+            console.log("dropped: ", dayDiff);
             Item.dropOff(item);
           }
         };
@@ -66,18 +74,18 @@
               showHide(activeList[i]);
             }
           }
-          console.log("Test Message"); // Remove Test Log
-        }, 1000); // INCREASE INTERVAL
+          console.log("Test Message"); // Test Log
+        }, delay);
 
         function stopInterval() {
           $interval.cancel(timeoutId);
           timeoutId = undefined;
-          console.log("Interval Stopped"); // Remove Test Log
+          console.log("Interval Stopped"); // Test Log
         }
 
         element.on('$destroy', function() {
           stopInterval();
-          console.log("Destroy Interval"); // Remove Test Log
+          console.log("Destroy Interval"); // Test Log
         });
       }
     };
